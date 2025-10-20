@@ -188,6 +188,14 @@ MazeRouter::Decision MazeRouter::routeStep(const Cell& current, const Cell& goal
     }
     
     // Line 9-11: Enter traversal mode
+    // Choose hand rule based on goal direction
+    Direction goalDir = getDirectionFromDelta(goal.x - current.x, goal.y - current.y);
+    Direction incomingDirLeft = turnLeft(incomingDir);
+    Direction incomingDirRight = turnRight(incomingDir);
+    
+    // Choose LHR if goal is to the left of incoming direction, RHR if to the right
+    state.leftHand = (goalDir == incomingDirLeft);
+    
     state.mode = state.leftHand ? Mode::TRAVERSAL_LEFT : Mode::TRAVERSAL_RIGHT;
     Direction firstDir = state.leftHand ? getLeftHandRuleDir(current, goal) : getRightHandRuleDir(current, goal);
     
