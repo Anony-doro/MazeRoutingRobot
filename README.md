@@ -1,2 +1,2 @@
-# PP_Moovita
+# MazeRoutingRobot
 Personal project for robot navigation
